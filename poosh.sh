@@ -1,1 +1,9 @@
-scp `bash diff.sh | sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/ /g'` $1:$path
+. lib/utils.sh
+. lib/check.sh $1
+
+diff() {
+    git diff --name-only --diff-filter=AM HEAD
+    git ls-files --others --exclude-standard
+}
+
+scp `diff | tr "\n" " "` $1:`locate $1 $2`

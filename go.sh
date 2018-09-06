@@ -1,1 +1,3 @@
-ssh $1 -t "cd `bash locate.sh $1 ${2:-~}`; bash -l"
+. lib/utils.sh
+. lib/check.sh $1
+ssh $1 -t "cd `locate $1 $2`; bash -l"
