@@ -1,5 +1,5 @@
-. lib/utils.sh
-. lib/check.sh $1
+. utils/utils.sh
+. utils/check.sh $1
 
 diff() {
     git diff --name-only --diff-filter=AM HEAD
