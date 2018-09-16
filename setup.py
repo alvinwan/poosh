@@ -14,7 +14,7 @@ setup(
     version=VERSION,
     author="Alvin Wan",
     author_email='hi@alvinwan.com',
-    description="Automatically find, navigate to, and update server copy of local git repository",
+    description="Automatically find and update remote copies of your local Git repository.",
     license="BSD",
     url="https://github.com/alvinwan/poosh",
     packages=['poosh'],
