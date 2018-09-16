@@ -10,4 +10,10 @@ diff() {
     git ls-files --others --exclude-standard
 }
 
-scp `diff | tr "\n" " "` $1:`locate $1 $2`
+files=`diff | tr "\n" " "`
+if [ -z "$files" ]
+then
+  echo " * [ERR] No files to poosh. Do you have untracked or modified files? Check using 'git status'."
+else
+  scp $files $1:`locate $1 $2`
+fi

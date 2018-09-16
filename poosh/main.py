@@ -72,7 +72,7 @@ def main():
         settings.save_settings()
     elif args.command == 'list':
         for server, path in settings.items():
-            print(' * [{}] {}'.format(server, path or '(no path)'))
+            print(' * [poosh] {}: {}'.format(server, path or '(no path)'))
     elif args.command == 'config':
         if args.path:
             print(settings.settings_file)
@@ -81,18 +81,26 @@ def main():
 
     # Poosh utility functions
     elif args.command == 'go':
-        subprocess.check_call([get_script_path("go.sh"), args.server, args.path])
-    elif args.command == 'to':
-        servers = args.server or list(settings.keys())
+        command = [get_script_path("go.sh"), args.server]
+        path = args.path or settings.get(args.server, None)
+        if path:
+            command.append(path)
+        subprocess.check_call(command)
+    else:
+        args_server = getattr(args, 'server', [])
+        servers = args_server or list(settings.keys())
+
+        if not servers:
+            print(' * [poosh] No servers found.')
+            return
+
         for server in servers:
+            print(' * [poosh] Pooshing to {}'.format(server))
             command = [get_script_path("poo.sh"), server]
             path = args.path or settings.get(server, None)
             if path:
                 command.append(path)
             subprocess.check_call(command)
-    else:
-        # TODO: do what?
-        pass
 
 
 if __name__ == '__main__':
