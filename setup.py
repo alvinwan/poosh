@@ -3,7 +3,7 @@ from setuptools import setup
 
 
 tests_require = []
-install_requires = []
+install_requires = ['appdirs==1.4.3']
 
 
 VERSION = '0.0.1'
@@ -28,6 +28,6 @@ setup(
         "Topic :: Software Development :: Libraries",
     ],
     entry_points={'console_scripts': [
-        'expect = poosh.main:main'
+        'poosh = poosh.main:main'
     ]}
 )
